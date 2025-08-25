@@ -41,9 +41,32 @@
     <div class="dedication-text" id="dedication-text">
       <div class="signature" id="signature"></div>
     </div>
-    <div class="countdown" id="countdown"></div>
-    <div class="tree-container" id="tree-container"></div>
-    <audio src="Music/No.5 The Day I Met Her - Esther Abrami.mp3" id="bg-music" preload="auto"></audio>
-    <script src="Js/script.js"></script>
-</body>
-</html>
+   // Fecha de aniversario base
+const aniversario = new Date("2022-02-13");
+
+// Elemento donde se mostrará el conteo
+const countdownElement = document.getElementById("countdown");
+
+function actualizarCountdown() {
+  const hoy = new Date();
+
+  // Calcular el próximo aniversario
+  let proximo = new Date(hoy.getFullYear(), 1, 13); // febrero = 1
+  if (hoy > proximo) {
+    proximo = new Date(hoy.getFullYear() + 1, 1, 13);
+  }
+
+  // Calcular diferencia en días
+  const diffTime = proximo - hoy;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  // Mostrar mensaje
+  countdownElement.innerHTML = `
+    <p><strong>Fecha de aniversario:</strong> 13 de febrero de 2022</p>
+    <p><strong>Días que faltan para el próximo aniversario:</strong> ${diffDays} días</p>
+  `;
+}
+
+// Actualizar inmediatamente y luego cada día
+actualizarCountdown();
+setInterval(actualizarCountdown, 1000 * 60 * 60); // cada hora
